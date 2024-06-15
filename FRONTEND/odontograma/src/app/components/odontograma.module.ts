@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TooltipModule  } from '@amin-karimi/ng2-tooltip-directive';
+import { TooltipModule  } from '@cloudfactorydk/ng2-tooltip-directive';
 
 import { OdontogramaComponent } from './odontograma/odontograma.component';
 import { OdontogramaAnatomicoUIComponent } from './ui/odontograma-anatomico/anatomico.component';
