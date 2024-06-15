@@ -5,9 +5,10 @@ import { HistoriaClinicaService } from '../../services/historiaClinica.service';
 import { OdontogramaService } from '../../services/odontograma.service';
 import { ModalUIComponent } from '../ui/modal/modal.component';
 import {SpinnerComponent} from '../ui/spinner/spinner.component';
-
+import { MatDialog } from '@angular/material/dialog';
+import { DialogoComponent } from '../ui/dialogo/dialogo.component';
 import axios from 'axios';
-
+import domToImage from 'dom-to-image';
 @Component({
   selector: 'app-odontograma',
   templateUrl: './odontograma.component.html',
@@ -49,7 +50,8 @@ export class OdontogramaComponent {
   constructor(
     private historiaClinicaService: HistoriaClinicaService,
     private odontogramaService: OdontogramaService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dialog: MatDialog
   ) {
     this.tipoOdontograma = 'geometrico';
     this.isLoading = true;
@@ -140,26 +142,40 @@ export class OdontogramaComponent {
     }
   }
 
-  openConfirmationModal() {
+
+  async openConfirmationModal() {
     this.form.markAllAsTouched();
-    if (this.isFormValid()) {
-      const numDientes = Object.keys(this.odontograma).length;
-      const dientesTexto = numDientes > 1 ? 'dientes' : 'diente';
-      const pacienteNombre = this.paciente.nombres;
-      this.modal
-        .open(
-          'Confirmar Guardado de Odontograma',
-          `¿Estás seguro de que quieres guardar este odontograma de ${pacienteNombre}? Has marcado ${numDientes} ${dientesTexto}.`,
-          'confirm'
-        )
-        .then((result) => {
-          if (result) {
-            this.isLoading = true;
-            this.onSave();
-          }
-        });
+
+    if (!this.isFormValid()) {
+      return;
+    }
+
+    const numDientes = Object.keys(this.odontograma).length;
+    const dientesTexto = numDientes > 1 ? 'dientes' : 'diente';
+    const pacienteNombre = this.paciente.nombres;
+
+    try {
+      const result = await this.modal.open(
+        'Confirmar Guardado de Odontograma',
+        `¿Estás seguro de que quieres guardar este odontograma de ${pacienteNombre}? Has marcado ${numDientes} ${dientesTexto}.`,
+        'confirm'
+      );
+
+      if (!result) {
+        return;
+      }
+
+      // Aquí se guarda el odontograma
+      this.isLoading = true;
+      this.onSave();
+
+    } catch (error) {
+      console.error('Error al abrir el modal:', error);
+    } finally {
+      this.isLoading = false;
     }
   }
+
 
   onSave() {
     if (this.isFormValid()) {
@@ -217,5 +233,14 @@ export class OdontogramaComponent {
           console.error('Error al guardar odontograma:', error);
         });
     }
+  }
+
+  descargarPDF(){
+    const dialogRef = this.dialog.open(DialogoComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('El diálogo se cerró');
+      // Puedes realizar acciones después de que se cierre el diálogo si es necesario
+    });
   }
 }
