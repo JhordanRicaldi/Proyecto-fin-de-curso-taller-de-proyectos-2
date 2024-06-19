@@ -1,0 +1,9 @@
+
+
+cypress/results/*
+cypress/reports/*
+cypress/screenshots/*
+cypress/videos/*
+/node_modules
+
+# End of https://www.toptal.com/developers/gitignore/api/cypressio
