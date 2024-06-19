@@ -12,7 +12,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import { Paciente } from './models/OdontogramaGeomorfico.js';
 import bodyParser from 'body-parser';
-
+const dbFaker = require('./dbFaker.json');
 
 
 dotenv.config();
@@ -171,6 +171,17 @@ app.post('/buscar-paciente', async (req, res) => {
         console.error('Error al buscar paciente:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
+});
+
+
+app.get('/historiaClinica', (req, res) => {
+    const randomIndex = Math.floor(Math.random() * dbFaker.historiaClinica.length);
+    res.json(dbFaker.historiaClinica[randomIndex]);
+  });
+
+app.get('/userAuth', (req, res) => {
+    const randomIndex = Math.floor(Math.random() * dbFaker.userAuth.length);
+    res.json(dbFaker.userAuth[randomIndex]);
 });
 
 // Escuchar peticiones

@@ -23,7 +23,7 @@ export class DialogoComponent {
       const DNI = dniInput.value.toString().trim();
       console.log(nombre,correo,DNI);
 
-      axios.post('http://localhost:3001/enviar-mail', {nombre,correo,DNI}, {
+      axios.post('https://backend-nine-amber-97.vercel.app/enviar-mail', {nombre,correo,DNI}, {
         headers: {
           'Content-Type': 'application/json',
         },
