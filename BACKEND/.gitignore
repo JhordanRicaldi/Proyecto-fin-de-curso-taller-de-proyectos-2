@@ -1,4 +1,4 @@
 /node_modules
-.env
 /helpers/documents/
 /.vercel
+.env

@@ -31,7 +31,7 @@ export class DialogoComponent {
 
     axios
       .post(
-        'http://localhost:3001/enviar-mail',
+        'https://5r1t37dq-3001.brs.devtunnels.ms/enviar-mail',
         { nombre, correo, DNI },
         {
           headers: {

@@ -1,0 +1,22 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "dist/odontograma/**",
+        "use": "@vercel/static"
+      }
+    ],
+    "routes": [
+      {
+        "handle": "filesystem"
+      },
+      {
+        "src": "/(.*\\.(ico|txt|js|css|png|jpg|jpeg|svg|gif|webp))$",
+        "dest": "dist/odontograma/browser/$1"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "dist/odontograma/browser/index.html"
+      }
+    ]
+  }

@@ -33,7 +33,7 @@ app.use(express.static('public'));
 // Lectura y parseo de body
 app.use(express.json());
 
-let PORT = process.env.PORT || 3001;
+let PORT = 3001;
 
 app.get('/', (req, res) => {
     res.json({

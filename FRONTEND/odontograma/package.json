@@ -3,12 +3,10 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "npm run generate && concurrently \"npm run server\" \"ng serve\"",
-    "build": "ng build",
+    "start": "ng serve",
+    "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "generate": "node generateDataFake.js",
-    "server": "json-server --watch dbFaker.json"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
@@ -36,8 +34,6 @@
     "@types/dom-to-image": "^2.6.7",
     "@types/jasmine": "~5.1.0",
     "autoprefixer": "^10.4.19",
-    "concurrently": "^8.2.2",
-    "faker": "^5.5.3",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

@@ -183,6 +183,7 @@ export class OdontogramaComponent implements OnInit {
 
   onSave() {
     if (this.isFormValid()) {
+      this.isLoading = true;
       const odontograma = {
         especificaciones: this.form.controls['especificaciones'].value,
         observaciones: this.form.controls['observaciones'].value,
@@ -223,7 +224,7 @@ export class OdontogramaComponent implements OnInit {
       const pacienteJSON = JSON.stringify(paciente);
 
       axios
-        .post('http://localhost:3001/pacientes', pacienteJSON, {
+        .post('https://backend-nine-amber-97.vercel.app/pacientes', pacienteJSON, {
           headers: {
             'Content-Type': 'application/json',
           },

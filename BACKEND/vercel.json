@@ -1,0 +1,16 @@
+{
+    "version": 2, // Versión del archivo de configuración (actualmente 2)
+    "builds": [
+      {
+        "src": "index.js", // Archivo de entrada para la construcción
+        "use": "@vercel/node" // Tipo de construcción (Node.js en este caso)
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)", // Expresión regular para todas las rutas
+        "dest": "index.js" // Archivo de destino para las rutas
+      }
+    ]
+  }
+  
